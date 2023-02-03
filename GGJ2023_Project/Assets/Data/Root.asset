@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9cbd5e7578248e5a23281a5a36459d2, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  handPrefab: {fileID: 770940555883920525, guid: 0eeb76d38cf91cf4f884b67a7f361e9b,
+    type: 3}
+  loseOnUse: 1
