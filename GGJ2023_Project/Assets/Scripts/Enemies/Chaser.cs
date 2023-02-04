@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class Chaser : MonoBehaviour
     [SerializeField] private ChaserState startState;
     [SerializeField, ReadOnly] private ChaserState currentState;
     
-    [ReadOnly] public bool isInvisible;
+    private bool isInvisible = true;
 
     [SerializeField] private float patrolSpeed;
     [SerializeField] private float chaseSpeed;
@@ -28,8 +29,9 @@ public class Chaser : MonoBehaviour
     [SerializeField] private LayerMask checkWallMask;
 
     public bool hasHeardSound;
+    [NonSerialized] public Vector3 soundPosition;
 
-    private NavMeshAgent agent;
+    [NonSerialized] public NavMeshAgent agent;
     private Transform player;
 
     private Vector3 currentDir;
@@ -47,18 +49,18 @@ public class Chaser : MonoBehaviour
         SetNextPoint();
     }
 
-    private void OnBecameInvisible()
-    {
-        isInvisible = true;
-        agent.isStopped = false;
-    }
-    
-    private void OnBecameVisible()
-    {
-        isInvisible = false;
-        agent.isStopped = true;
-        agent.velocity = Vector3.zero;
-    }
+    // private void OnBecameInvisible()
+    // {
+    //     isInvisible = true;
+    //     agent.isStopped = false;
+    // }
+    //
+    // private void OnBecameVisible()
+    // {
+    //     isInvisible = false;
+    //     agent.isStopped = true;
+    //     agent.velocity = Vector3.zero;
+    // }
 
     private void Patrol()
     {
@@ -120,13 +122,10 @@ public class Chaser : MonoBehaviour
                 Patrol();
                 break;
             case ChaserState.Chasing:
-                if (currentState == ChaserState.Chasing)
+                if (isInvisible)
                 {
-                    if (isInvisible)
-                    {
-                        agent.speed = chaseSpeed;
-                        agent.SetDestination(player.position);
-                    }
+                    agent.speed = chaseSpeed;
+                    agent.SetDestination(player.position);
                 }
                 break;
         }

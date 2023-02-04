@@ -125,10 +125,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3145595659565956528}
     m_Modifications:
+    - target: {fileID: 922275654982289722, guid: 53943e3028a4a404b836faf7fde87ca9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 922275654983356224, guid: 53943e3028a4a404b836faf7fde87ca9,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 922275654983356229, guid: 53943e3028a4a404b836faf7fde87ca9,
+        type: 3}
+      propertyPath: slowSpeed
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 922275654983356230, guid: 53943e3028a4a404b836faf7fde87ca9,
         type: 3}

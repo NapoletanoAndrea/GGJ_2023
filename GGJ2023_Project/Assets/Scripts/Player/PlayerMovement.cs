@@ -1,9 +1,14 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
+    public float slowSpeed;
+    [ReadOnly] public bool isSlow;
+
+    private float walkSpeed;
 
     public float groundDrag;
 
@@ -14,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode slowDownKey = KeyCode.LeftControl;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -31,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        walkSpeed = moveSpeed;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
@@ -71,6 +78,33 @@ public class PlayerMovement : MonoBehaviour
 
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+
+        if (Input.GetKeyDown(slowDownKey) && grounded)
+        {
+            SlowDown();
+        }
+        if (Input.GetKeyUp(slowDownKey) && grounded)
+        {
+            ReleaseSlowDown();
+        }
+    }
+
+    private void SlowDown()
+    {
+        if (!isSlow)
+        {
+            walkSpeed = slowSpeed;
+            isSlow = true;
+        }
+    }
+
+    private void ReleaseSlowDown()
+    {
+        if (isSlow)
+        {
+            walkSpeed = moveSpeed;
+            isSlow = false;
+        }
     }
 
     private void MovePlayer()
@@ -80,11 +114,11 @@ public class PlayerMovement : MonoBehaviour
 
         // on ground
         if(grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * walkSpeed * 10f, ForceMode.Force);
 
         // in air
         else if(!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * walkSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
     private void SpeedControl()
