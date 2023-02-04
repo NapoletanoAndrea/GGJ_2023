@@ -1,12 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1477396317418135507
+--- !u!1001 &6200700526015125961
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8088957626590527742, guid: 843d6ced486c9c145b8a1cb3bf58c016,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5898305b014258940aa7e6ab96c0650a, type: 2}
     - target: {fileID: 8934314925279236529, guid: 843d6ced486c9c145b8a1cb3bf58c016,
         type: 3}
       propertyPath: m_RootOrder
@@ -20,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 8934314925279236529, guid: 843d6ced486c9c145b8a1cb3bf58c016,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.05
       objectReference: {fileID: 0}
     - target: {fileID: 8934314925279236529, guid: 843d6ced486c9c145b8a1cb3bf58c016,
         type: 3}
@@ -72,15 +77,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorType1
       objectReference: {fileID: 0}
-    - target: {fileID: 8934314925447784355, guid: 843d6ced486c9c145b8a1cb3bf58c016,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: df27f03f7e51ce44bbb160dd897ee187, type: 2}
-    - target: {fileID: 8934314925744595668, guid: 843d6ced486c9c145b8a1cb3bf58c016,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: df27f03f7e51ce44bbb160dd897ee187, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 843d6ced486c9c145b8a1cb3bf58c016, type: 3}
