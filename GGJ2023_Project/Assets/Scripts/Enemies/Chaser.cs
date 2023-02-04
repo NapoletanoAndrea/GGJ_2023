@@ -147,6 +147,13 @@ public class Chaser : MonoBehaviour
 
     private void CheckPlayer()
     {
+        if (currentState == ChaserState.Chasing)
+        {
+            if (Vector3.Distance(transform.position, player.position) < aggroRange)
+            {
+                return;
+            }
+        }
         if (!isInvisible)
         {
             hasHeardSound = false;
