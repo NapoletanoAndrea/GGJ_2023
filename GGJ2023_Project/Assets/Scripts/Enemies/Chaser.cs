@@ -31,6 +31,8 @@ public class Chaser : MonoBehaviour
 
     public bool hasHeardSound;
 
+    [SerializeField] private bool visibilitySettings;
+
     [NonSerialized] public NavMeshAgent agent;
     private Transform player;
 
@@ -44,6 +46,7 @@ public class Chaser : MonoBehaviour
         currentState = startState;
         player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
     }
 
     public void RestoreInitialPosition()
@@ -61,12 +64,18 @@ public class Chaser : MonoBehaviour
 
     private void OnBecameInvisible()
     {
+        if (!visibilitySettings)
+            return;
+        
         isInvisible = true;
         agent.isStopped = false;
     }
     
     private void OnBecameVisible()
     {
+        if (!visibilitySettings)
+            return;
+        
         isInvisible = false;
         agent.isStopped = true;
         agent.velocity = Vector3.zero;
@@ -76,7 +85,6 @@ public class Chaser : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.position) > maxDistanceFromPlayer)
         {
-            Debug.Log("Dio can");
             agent.SetDestination(player.position);
             return;
         }
@@ -149,6 +157,10 @@ public class Chaser : MonoBehaviour
                     agent.isStopped = true;
                 }
                 break;
+        }
+        if (agent.velocity.normalized != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(agent.velocity.normalized);
         }
         // Debug.Log(currentState);
     }
