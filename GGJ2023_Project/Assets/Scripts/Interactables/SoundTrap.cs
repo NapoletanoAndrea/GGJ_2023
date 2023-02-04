@@ -6,6 +6,7 @@ public class SoundTrap : MonoBehaviour
 	private PlayerMovement playerMovement;
 	private Chaser chaser;
 
+	[SerializeField] private bool dontAttractRoots = false;
 	[SerializeField] private Collider openDoorTrigger;
 	[SerializeField] private float openSeconds;
 
@@ -19,10 +20,10 @@ public class SoundTrap : MonoBehaviour
 		var results = Physics.OverlapSphere(openDoorTrigger.bounds.center, openDoorTrigger.bounds.extents.x);
 		foreach (var result in results)
 		{
-			Door door = result.GetComponent<Door>();
+			Door door = result.transform.parent.GetComponent<Door>();
 			if (door)
 			{
-				doors.Add(door);
+				doors.AddUnique(door);
 			}
 		}
 	}
@@ -33,9 +34,11 @@ public class SoundTrap : MonoBehaviour
 		{
 			if (chaser && !playerMovement.isSlow)
 			{
-				Debug.Log("Lured");
-				chaser.hasHeardSound = true;
-				chaser.agent.SetDestination(transform.position);
+				if (!dontAttractRoots)
+				{
+					chaser.hasHeardSound = true;
+					chaser.agent.SetDestination(transform.position);	
+				}
 				foreach (var door in doors)
 				{
 					door.OpenTimed(openSeconds);

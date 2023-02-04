@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 922275654982289721}
   - component: {fileID: 922275654982289726}
   - component: {fileID: 922275654982289727}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 922275654983356229}
   - component: {fileID: 922275654983356228}
   - component: {fileID: 922275654983356235}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -165,11 +165,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  slowSpeed: 0
+  isSlow: 0
   groundDrag: 1.75
   jumpForce: 0
   jumpCooldown: 0
   airMultiplier: 0
   jumpKey: 32
+  slowDownKey: 306
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -213,7 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 922275655035823808}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 922275655264278786}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

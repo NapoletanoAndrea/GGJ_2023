@@ -106,6 +106,7 @@ public class Chaser : MonoBehaviour
         else
         {
             nextPoint = transform.position - currentDir * raycastDistance;
+            currentDir *= -1;
         }
         
         agent.isStopped = false;
