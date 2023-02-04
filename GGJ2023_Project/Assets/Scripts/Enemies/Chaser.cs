@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class Chaser : MonoBehaviour
 {
-    private enum ChaserState
+    public enum ChaserState
     {
         Patrolling,
         Chasing,
@@ -15,27 +14,30 @@ public class Chaser : MonoBehaviour
     }
 
     [SerializeField] private ChaserState startState;
-    [SerializeField, ReadOnly] private ChaserState currentState;
+    public ChaserState currentState;
     
     private bool isInvisible = true;
 
     [SerializeField] private float patrolSpeed;
     [SerializeField] private float chaseSpeed;
 
-    [SerializeField] private float aggroRange;
+    [SerializeField] public float aggroRange;
     [SerializeField] private LayerMask checkPlayerMask;
 
     [SerializeField] private float raycastDistance;
     [SerializeField] private LayerMask checkWallMask;
 
+    public float maxDistanceFromPlayer;
+
     public bool hasHeardSound;
-    [NonSerialized] public Vector3 soundPosition;
 
     [NonSerialized] public NavMeshAgent agent;
     private Transform player;
 
     private Vector3 currentDir;
     private Vector3 nextPoint;
+
+    private Vector3 startPosition;
 
     private void Awake()
     {
@@ -44,26 +46,40 @@ public class Chaser : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    private void Start()
+    public void RestoreInitialPosition()
     {
+        transform.position = startPosition;
+        currentState = ChaserState.Patrolling;
         SetNextPoint();
     }
 
-    // private void OnBecameInvisible()
-    // {
-    //     isInvisible = true;
-    //     agent.isStopped = false;
-    // }
-    //
-    // private void OnBecameVisible()
-    // {
-    //     isInvisible = false;
-    //     agent.isStopped = true;
-    //     agent.velocity = Vector3.zero;
-    // }
+    private void Start()
+    {
+        startPosition = transform.position;
+        SetNextPoint();
+    }
+
+    private void OnBecameInvisible()
+    {
+        isInvisible = true;
+        agent.isStopped = false;
+    }
+    
+    private void OnBecameVisible()
+    {
+        isInvisible = false;
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+    }
 
     private void Patrol()
     {
+        if (Vector3.Distance(transform.position, player.position) > maxDistanceFromPlayer)
+        {
+            Debug.Log("Dio can");
+            agent.SetDestination(player.position);
+            return;
+        }
         if (!agent.pathPending)
         {
             if (agent.remainingDistance <= agent.stoppingDistance)
@@ -128,12 +144,24 @@ public class Chaser : MonoBehaviour
                     agent.speed = chaseSpeed;
                     agent.SetDestination(player.position);
                 }
+                else
+                {
+                    agent.isStopped = true;
+                }
                 break;
         }
+        // Debug.Log(currentState);
     }
 
     private void CheckPlayer()
     {
+        if (currentState == ChaserState.Chasing)
+        {
+            if (Vector3.Distance(transform.position, player.position) < aggroRange)
+            {
+                return;
+            }
+        }
         if (!isInvisible)
         {
             hasHeardSound = false;
@@ -142,7 +170,7 @@ public class Chaser : MonoBehaviour
         }
         if (Vector3.Distance(transform.position, player.position) < aggroRange)
         {
-            if (Physics.Raycast(transform.position, player.position, aggroRange, checkPlayerMask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(transform.position, (player.position - transform.position).normalized, aggroRange, checkPlayerMask, QueryTriggerInteraction.Ignore))
             {
                 hasHeardSound = false;
                 currentState = ChaserState.Chasing;
