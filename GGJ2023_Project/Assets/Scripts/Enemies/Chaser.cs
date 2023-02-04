@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -15,7 +14,7 @@ public class Chaser : MonoBehaviour
     }
 
     [SerializeField] private ChaserState startState;
-    [SerializeField, ReadOnly] public ChaserState currentState;
+    public ChaserState currentState;
     
     private bool isInvisible = true;
 
@@ -50,6 +49,8 @@ public class Chaser : MonoBehaviour
     public void RestoreInitialPosition()
     {
         transform.position = startPosition;
+        currentState = ChaserState.Patrolling;
+        SetNextPoint();
     }
 
     private void Start()
@@ -58,24 +59,26 @@ public class Chaser : MonoBehaviour
         SetNextPoint();
     }
 
-    // private void OnBecameInvisible()
-    // {
-    //     isInvisible = true;
-    //     agent.isStopped = false;
-    // }
-    //
-    // private void OnBecameVisible()
-    // {
-    //     isInvisible = false;
-    //     agent.isStopped = true;
-    //     agent.velocity = Vector3.zero;
-    // }
+    private void OnBecameInvisible()
+    {
+        isInvisible = true;
+        agent.isStopped = false;
+    }
+    
+    private void OnBecameVisible()
+    {
+        isInvisible = false;
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+    }
 
     private void Patrol()
     {
         if (Vector3.Distance(transform.position, player.position) > maxDistanceFromPlayer)
         {
+            Debug.Log("Dio can");
             agent.SetDestination(player.position);
+            return;
         }
         if (!agent.pathPending)
         {
@@ -141,8 +144,13 @@ public class Chaser : MonoBehaviour
                     agent.speed = chaseSpeed;
                     agent.SetDestination(player.position);
                 }
+                else
+                {
+                    agent.isStopped = true;
+                }
                 break;
         }
+        // Debug.Log(currentState);
     }
 
     private void CheckPlayer()
@@ -162,7 +170,7 @@ public class Chaser : MonoBehaviour
         }
         if (Vector3.Distance(transform.position, player.position) < aggroRange)
         {
-            if (Physics.Raycast(transform.position, player.position, aggroRange, checkPlayerMask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(transform.position, (player.position - transform.position).normalized, aggroRange, checkPlayerMask, QueryTriggerInteraction.Ignore))
             {
                 hasHeardSound = false;
                 currentState = ChaserState.Chasing;

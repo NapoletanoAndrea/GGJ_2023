@@ -25,9 +25,19 @@ public class BlackScreen : MonoBehaviour
 		}
 	}
 
+	private void InvokeInEvent()
+	{
+		FadedIn?.Invoke();
+	}
+
+	private void InvokeOutEvent()
+	{
+		FadedOut?.Invoke();
+	}
+
 	public void FadeIn(float seconds)
 	{
-		StartCoroutine(FadeCoroutine(seconds, 0, 1, FadedIn));
+		StartCoroutine(FadeCoroutine(seconds, 0, 1, InvokeInEvent));
 	}
 
 	private IEnumerator FadeCoroutine(float seconds, float startAlpha, float endAlpha, Action action = null)
@@ -49,6 +59,6 @@ public class BlackScreen : MonoBehaviour
 
 	public void FadeOut(float seconds)
 	{
-		StartCoroutine(FadeCoroutine(seconds, 1, 0, FadedOut));
+		StartCoroutine(FadeCoroutine(seconds, 1, 0, InvokeOutEvent));
 	}
 }

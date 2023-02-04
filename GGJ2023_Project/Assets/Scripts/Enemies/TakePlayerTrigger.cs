@@ -29,10 +29,12 @@ public class TakePlayerTrigger : MonoBehaviour
 
 	private void OnFadedIn()
 	{
+		BlackScreen.Instance.FadedIn -= OnFadedIn;
 		BlackScreen.Instance.FadedOut += OnFadedOut;
 		BlackScreen.Instance.FadeOut(fadeSeconds);
 		chaser.RestoreInitialPosition();
 		chaser.enabled = true;
+		chaser.agent.isStopped = false;
 		doorManager.ChangeLayout();
 	}
 
