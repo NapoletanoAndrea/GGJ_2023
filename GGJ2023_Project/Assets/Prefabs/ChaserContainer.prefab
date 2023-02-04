@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41378bc492a46b2a4573dcd479bcca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSeconds: 2
 --- !u!1 &7835108682685099000
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +247,7 @@ MonoBehaviour:
   currentState: 0
   patrolSpeed: 5
   chaseSpeed: 10
-  aggroRange: 6
+  aggroRange: 12
   checkPlayerMask:
     serializedVersion: 2
     m_Bits: 65
@@ -254,4 +255,5 @@ MonoBehaviour:
   checkWallMask:
     serializedVersion: 2
     m_Bits: 1
+  maxDistanceFromPlayer: 60
   hasHeardSound: 0
