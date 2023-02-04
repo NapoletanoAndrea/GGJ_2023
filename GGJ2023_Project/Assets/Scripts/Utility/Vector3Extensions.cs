@@ -55,4 +55,10 @@ public static class Vector3Extensions
     {
         return new Vector3(Mathf.Abs(vector.x), Mathf.Abs(vector.y), Mathf.Abs(vector.z));
     }
+
+    public static Vector3 GetRandomDirectionAroundY()
+    {
+        float randomAngle = Random.Range(0f, 360f);
+        return Quaternion.AngleAxis(randomAngle, Vector3.up) * Vector3.forward;
+    }
 }

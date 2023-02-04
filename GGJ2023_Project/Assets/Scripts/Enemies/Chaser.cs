@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class Chaser : MonoBehaviour
 {
-    private enum ChaserState
+    public enum ChaserState
     {
         Patrolling,
         Chasing,
@@ -15,27 +15,30 @@ public class Chaser : MonoBehaviour
     }
 
     [SerializeField] private ChaserState startState;
-    [SerializeField, ReadOnly] private ChaserState currentState;
+    [SerializeField, ReadOnly] public ChaserState currentState;
     
     private bool isInvisible = true;
 
     [SerializeField] private float patrolSpeed;
     [SerializeField] private float chaseSpeed;
 
-    [SerializeField] private float aggroRange;
+    [SerializeField] public float aggroRange;
     [SerializeField] private LayerMask checkPlayerMask;
 
     [SerializeField] private float raycastDistance;
     [SerializeField] private LayerMask checkWallMask;
 
+    public float maxDistanceFromPlayer;
+
     public bool hasHeardSound;
-    [NonSerialized] public Vector3 soundPosition;
 
     [NonSerialized] public NavMeshAgent agent;
     private Transform player;
 
     private Vector3 currentDir;
     private Vector3 nextPoint;
+
+    private Vector3 startPosition;
 
     private void Awake()
     {
@@ -44,8 +47,14 @@ public class Chaser : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
+    public void RestoreInitialPosition()
+    {
+        transform.position = startPosition;
+    }
+
     private void Start()
     {
+        startPosition = transform.position;
         SetNextPoint();
     }
 
@@ -64,6 +73,10 @@ public class Chaser : MonoBehaviour
 
     private void Patrol()
     {
+        if (Vector3.Distance(transform.position, player.position) > maxDistanceFromPlayer)
+        {
+            agent.SetDestination(player.position);
+        }
         if (!agent.pathPending)
         {
             if (agent.remainingDistance <= agent.stoppingDistance)
