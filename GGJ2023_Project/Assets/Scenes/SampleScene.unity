@@ -918,6 +918,7 @@ MonoBehaviour:
   interactLayer:
     serializedVersion: 2
     m_Bits: 9
+  distance: 15
 --- !u!114 &1444991784
 MonoBehaviour:
   m_ObjectHideFlags: 0
