@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openSpeed: 1
-  layout: 0
+  layout: 1
 --- !u!95 &8934314925279236528
 Animator:
   serializedVersion: 4
