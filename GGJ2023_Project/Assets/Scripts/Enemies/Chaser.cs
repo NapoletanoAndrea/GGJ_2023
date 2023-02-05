@@ -83,11 +83,11 @@ public class Chaser : MonoBehaviour
 
     private void Patrol()
     {
-        if (Vector3.Distance(transform.position, player.position) > maxDistanceFromPlayer)
-        {
-            agent.SetDestination(player.position);
-            return;
-        }
+        // if (Vector3.Distance(transform.position, player.position) > maxDistanceFromPlayer)
+        // {
+        //     agent.SetDestination(player.position);
+        //     return;
+        // }
         if (!agent.pathPending)
         {
             if (agent.remainingDistance <= agent.stoppingDistance)
