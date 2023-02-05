@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 8611070927633743326}
   - component: {fileID: 8611070927633743325}
   - component: {fileID: 8611070927633743297}
+  - component: {fileID: 6373418056988549364}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -220,6 +221,24 @@ MonoBehaviour:
   dontAttractRoots: 0
   openDoorTrigger: {fileID: 8611070927499933698}
   openSeconds: 3
+--- !u!114 &6373418056988549364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611070927633743324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83fc94cdf78bb434c91ce27a43590d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCueDictionary:
+    keyData:
+    - Trigger
+    valueData:
+    - {fileID: 11400000, guid: 34733727e4505094cb8e71bf14cd1c28, type: 2}
+  audioEmitter: {fileID: 8611070927633743326}
 --- !u!1001 &1182939063657735781
 PrefabInstance:
   m_ObjectHideFlags: 0

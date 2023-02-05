@@ -41,6 +41,8 @@ public class Chaser : MonoBehaviour
 
     private Vector3 startPosition;
 
+    private GenericEntityAudio audio;
+
     private void Awake()
     {
         currentState = startState;
@@ -137,6 +139,12 @@ public class Chaser : MonoBehaviour
 
     private void Update()
     {
+        if (agent.velocity.magnitude > .1f)
+        {
+            audio?.PlayAudio("Move1");
+            audio?.PlayAudio("Move2");
+            audio?.PlayAudio("Move3");
+        }
         CheckPlayer();
         switch (currentState)
         {
