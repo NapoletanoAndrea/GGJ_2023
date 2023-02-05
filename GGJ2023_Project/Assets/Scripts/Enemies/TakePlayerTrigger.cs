@@ -22,6 +22,7 @@ public class TakePlayerTrigger : MonoBehaviour
 			chaser.enabled = false;
 			chaser.agent.isStopped = true;
 			playerMovement.enabled = false;
+			BlackScreen.Instance.SetColor(Color.black);
 			BlackScreen.Instance.FadeIn(fadeSeconds);
 			BlackScreen.Instance.FadedIn += OnFadedIn;
 		}

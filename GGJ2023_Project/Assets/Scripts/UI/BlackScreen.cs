@@ -35,12 +35,23 @@ public class BlackScreen : MonoBehaviour
 		FadedOut?.Invoke();
 	}
 
+	public void SetColor(Color color)
+	{
+		float alpha = blackScreen.color.a;
+		blackScreen.color = color.GetAlphaColor(alpha);
+	}
+
+	public void SetAlpha(float alpha)
+	{
+		blackScreen.color = blackScreen.color.GetAlphaColor(alpha);
+	}
+
 	public void FadeIn(float seconds)
 	{
 		StartCoroutine(FadeCoroutine(seconds, 0, 1, InvokeInEvent));
 	}
 
-	private IEnumerator FadeCoroutine(float seconds, float startAlpha, float endAlpha, Action action = null)
+	public IEnumerator FadeCoroutine(float seconds, float startAlpha, float endAlpha, Action action = null)
 	{
 		blackScreen.color = blackScreen.color.GetAlphaColor(startAlpha);
 
@@ -60,5 +71,17 @@ public class BlackScreen : MonoBehaviour
 	public void FadeOut(float seconds)
 	{
 		StartCoroutine(FadeCoroutine(seconds, 1, 0, InvokeOutEvent));
+	}
+
+	public void CompleteFade(float fadeSeconds, float stayOnScreenSeconds)
+	{
+		StartCoroutine(CompleteFadeCoroutine(fadeSeconds, stayOnScreenSeconds));
+	}
+
+	private IEnumerator CompleteFadeCoroutine(float fadeSeconds, float stayOnScreenSeconds)
+	{
+		yield return FadeCoroutine(fadeSeconds, 0, 1, InvokeInEvent);
+		yield return new WaitForSeconds(stayOnScreenSeconds);
+		yield return FadeCoroutine(fadeSeconds, 1, 0, InvokeOutEvent);
 	}
 }

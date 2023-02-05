@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -38,6 +39,10 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    private Vector3 startPosition;
+
+    public event Action OnPlayerDeath;
+
     private void Start()
     {
         walkSpeed = moveSpeed;
@@ -45,6 +50,13 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
 
         readyToJump = true;
+        startPosition = transform.position;
+    }
+
+    public void RestorePosition()
+    {
+        transform.position = startPosition;
+        OnPlayerDeath?.Invoke();
     }
 
     private void Update()
