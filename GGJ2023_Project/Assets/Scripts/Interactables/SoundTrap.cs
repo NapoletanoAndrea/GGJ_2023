@@ -20,10 +20,13 @@ public class SoundTrap : MonoBehaviour
 		var results = Physics.OverlapSphere(openDoorTrigger.bounds.center, openDoorTrigger.bounds.extents.x);
 		foreach (var result in results)
 		{
-			Door door = result.transform.parent.GetComponent<Door>();
-			if (door)
+			if (result.transform.parent)
 			{
-				doors.AddUnique(door);
+				Door door = result.transform.parent.GetComponent<Door>();
+				if (door)
+				{
+					doors.AddUnique(door);
+				}
 			}
 		}
 	}
