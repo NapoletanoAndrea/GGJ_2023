@@ -7,6 +7,8 @@ public class OnPortalsReachedEventBehavior : MonoBehaviour
 
 	private int count = 0;
 
+	public Animator ani;
+
 	public UnityEvent toRaise;
 
 	private PlayerMovement playerMovement;
@@ -31,6 +33,10 @@ public class OnPortalsReachedEventBehavior : MonoBehaviour
 		count++;
 		if (count == portalsNeeded)
 		{
+            if (ani)
+            {
+				ani.SetBool("IsOpen", true);
+			}
 			toRaise?.Invoke();
 		}
 	}
