@@ -37,13 +37,14 @@ public class Portal : MonoBehaviour
 	private void OnFadedIn()
 	{
 		BlackScreen.Instance.FadedIn -= OnFadedIn;
-		BlackScreen.Instance.FadedOut -= OnFadedOut;
+		BlackScreen.Instance.FadedOut += OnFadedOut;
 		textFadeComponent.CompleteFade(fadeDialogueSeconds, dialogueStayOnScreenSeconds);
 		playerMovement.RestorePosition();
 	}
 
 	private void OnFadedOut()
 	{
+		BlackScreen.Instance.FadedOut -= OnFadedOut;
 		playerMovement.enabled = true;
 		if (chaser)
 		{
