@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: "Assets/Scenes/Men\xF9.unity"
+    guid: f77a4d8e8bedab34c9567fb5ea939493
+  - enabled: 1
+    path: Assets/Scenes/IntroLivello.unity
+    guid: ad16728decf25524c856096c030413b3
+  - enabled: 1
+    path: Assets/Scenes/Level-Design.unity
+    guid: a7b4050025eaf444b99a12b2244e852c
   m_configObjects: {}

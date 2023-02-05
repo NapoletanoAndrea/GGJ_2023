@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2282024629833726968}
   - component: {fileID: 4057626744213901106}
   - component: {fileID: 6517905663801026911}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Piano
   m_TagString: Untagged
   m_Icon: {fileID: 0}
