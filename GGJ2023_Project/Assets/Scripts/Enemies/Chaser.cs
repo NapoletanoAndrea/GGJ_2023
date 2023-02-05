@@ -16,7 +16,7 @@ public class Chaser : MonoBehaviour
     [SerializeField] private ChaserState startState;
     public ChaserState currentState;
     
-    private bool isInvisible = true;
+    [SerializeField] private bool isInvisible = true;
 
     [SerializeField] private float patrolSpeed;
     [SerializeField] private float chaseSpeed;
@@ -83,11 +83,11 @@ public class Chaser : MonoBehaviour
 
     private void Patrol()
     {
-        if (Vector3.Distance(transform.position, player.position) > maxDistanceFromPlayer)
-        {
-            agent.SetDestination(player.position);
-            return;
-        }
+        // if (Vector3.Distance(transform.position, player.position) > maxDistanceFromPlayer)
+        // {
+        //     agent.SetDestination(player.position);
+        //     return;
+        // }
         if (!agent.pathPending)
         {
             if (agent.remainingDistance <= agent.stoppingDistance)
@@ -124,7 +124,6 @@ public class Chaser : MonoBehaviour
             int rng = Random.Range(0, possibleDirections.Count);
             currentDir = possibleDirections[rng];
             nextPoint = transform.position + currentDir * raycastDistance;
-            agent.isStopped = false;
             agent.SetDestination(nextPoint);
         }
         else
@@ -133,7 +132,6 @@ public class Chaser : MonoBehaviour
             currentDir *= -1;
         }
         
-        agent.isStopped = false;
         agent.SetDestination(nextPoint);
     }
 

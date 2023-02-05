@@ -6,7 +6,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
     public float slowSpeed;
+    public float runSpeed;
     [ReadOnly] public bool isSlow;
+    [ReadOnly] public bool isRunning;
 
     private float walkSpeed;
 
@@ -20,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode slowDownKey = KeyCode.LeftControl;
+    public KeyCode runKey = KeyCode.LeftShift;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -79,13 +82,21 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        if (Input.GetKeyDown(slowDownKey) && grounded)
+        if (Input.GetKeyDown(slowDownKey) && grounded && !isRunning)
         {
             SlowDown();
         }
-        if (Input.GetKeyUp(slowDownKey) && grounded)
+        if (Input.GetKeyUp(slowDownKey) && grounded && !isRunning)
         {
             ReleaseSlowDown();
+        }
+        if (Input.GetKeyDown(runKey) && grounded && !isSlow)
+        {
+            StartRunning();
+        }
+        if (Input.GetKeyUp(runKey) && grounded && !isSlow)
+        {
+            StopRunning();
         }
     }
 
@@ -104,6 +115,24 @@ public class PlayerMovement : MonoBehaviour
         {
             walkSpeed = moveSpeed;
             isSlow = false;
+        }
+    }
+
+    private void StartRunning()
+    {
+        if (!isRunning)
+        {
+            isRunning = true;
+            walkSpeed = runSpeed;
+        }
+    }
+
+    private void StopRunning()
+    {
+        if (isRunning)
+        {
+            isRunning = false;
+            walkSpeed = moveSpeed;
         }
     }
 
