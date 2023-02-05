@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 922275654983356229}
   - component: {fileID: 922275654983356228}
   - component: {fileID: 922275654983356235}
+  - component: {fileID: 1134619482481728096}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -166,13 +167,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   slowSpeed: 0
+  runSpeed: 0
   isSlow: 0
+  isRunning: 0
   groundDrag: 1.75
   jumpForce: 0
   jumpCooldown: 0
   airMultiplier: 0
   jumpKey: 32
   slowDownKey: 306
+  runKey: 304
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -207,6 +211,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e503f180aedf43b0865bb29af27ff30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1134619482481728096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922275654983356224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83fc94cdf78bb434c91ce27a43590d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCueDictionary:
+    keyData:
+    - Move
+    valueData:
+    - {fileID: 11400000, guid: 9c3e1660857ece049af9a0ddf4145595, type: 2}
+  audioEmitter: {fileID: 922275654983356230}
 --- !u!1 &922275655035823809
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,8 +12,11 @@ public class SoundTrap : MonoBehaviour
 
 	private List<Door> doors = new();
 
+	private GenericEntityAudio audio;
+
 	private void Awake()
 	{
+		audio = GetComponent<GenericEntityAudio>();
 		chaser = FindObjectOfType<Chaser>();
 		playerMovement = FindObjectOfType<PlayerMovement>();
 		
@@ -46,6 +49,7 @@ public class SoundTrap : MonoBehaviour
 				{
 					door.OpenTimed(openSeconds);
 				}
+				audio?.PlayAudio("Trigger");
 			}	
 		}
 	}
