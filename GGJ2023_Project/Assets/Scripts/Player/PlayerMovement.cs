@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
 
     private Vector3 startPosition;
+    private GenericEntityAudio audio;
 
     public event Action OnPlayerDeath;
 
@@ -51,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
 
         readyToJump = true;
         startPosition = transform.position;
+
+        audio = GetComponent<GenericEntityAudio>();
     }
 
     public void RestorePosition()
@@ -154,10 +157,16 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         // on ground
-        if(grounded)
+        if (grounded)
+        {
             rb.AddForce(moveDirection.normalized * walkSpeed * 10f, ForceMode.Force);
+            if (moveDirection.magnitude > .1f)
+            {
+                audio?.PlayAudio("Move");
+            }
+        }
 
-        // in air
+            // in air
         else if(!grounded)
             rb.AddForce(moveDirection.normalized * walkSpeed * 10f * airMultiplier, ForceMode.Force);
     }

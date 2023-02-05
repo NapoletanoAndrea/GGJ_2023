@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 1160040271799097140}
   - component: {fileID: 1160040271799097139}
   - component: {fileID: 1160040271799097138}
+  - component: {fileID: 8187948123054451827}
   m_Layer: 0
   m_Name: Chaser
   m_TagString: Untagged
@@ -335,6 +336,28 @@ MonoBehaviour:
   maxDistanceFromPlayer: 60
   hasHeardSound: 0
   visibilitySettings: 1
+--- !u!114 &8187948123054451827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160040271799097165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83fc94cdf78bb434c91ce27a43590d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCueDictionary:
+    keyData:
+    - Move1
+    - Move2
+    - Move3
+    valueData:
+    - {fileID: 11400000, guid: 3c2c123ae4abf1a4f9b46bc4d2ee02c7, type: 2}
+    - {fileID: 11400000, guid: 3aa3b84e08cbbd8409347d0f11d3cf9d, type: 2}
+    - {fileID: 11400000, guid: 904f9affb37d183448a7afc24bd03db6, type: 2}
+  audioEmitter: {fileID: 1160040271799097166}
 --- !u!1 &1742992727328542585
 GameObject:
   m_ObjectHideFlags: 0
