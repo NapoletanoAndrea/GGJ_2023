@@ -50,5 +50,6 @@ public class Portal : MonoBehaviour
 			chaser.enabled = true;
 			chaser.agent.isStopped = false;
 		}
+		enabled = false;
 	}
 }
